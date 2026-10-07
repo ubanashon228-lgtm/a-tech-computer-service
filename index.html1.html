@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-TECH Computer Services</title>
+    <style>
+        :root {
+            --primary: #0f766e;
+            --primary-dark: #0b4f4a;
+            --primary-soft: #dff7f4;
+            --accent: #25d366;
+            --accent-dark: #1ca752;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --light: #f5f7fb;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --shadow: 0 12px 30px rgba(15, 118, 110, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #f7fafb 0%, #edf5f4 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 14px 0;
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 1.1rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 0.95rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0d5e58 0%, #0f766e 45%, #12a69a 100%);
+            color: var(--white);
+            padding: 72px 0 48px;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1.4fr 0.9fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            margin: 0 0 28px;
+            font-size: 1.05rem;
+            max-width: 620px;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 26px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 14px 22px;
+            font-weight: 700;
+            transition: 0.2s ease;
+            text-align: center;
+        }
+
+        .primary-btn {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.25);
+        }
+
+        .primary-btn:hover {
+            background: var(--accent-dark);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            min-width: 120px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .stat span {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+        }
+
+        .hero-panel {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 22px;
+            padding: 26px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-panel h3 {
+            margin: 0 0 18px;
+            font-size: 1.2rem;
+        }
+
+        .service-mini {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+        }
+
+        .service-mini:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-mini span {
+            font-weight: 700;
+        }
+
+        .service-mini small {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        main {
+            padding: 48px 0 70px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 10px;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--primary-dark);
+        }
+
+        .section-heading p {
+            margin: 0 auto;
+            max-width: 640px;
+            color: var(--muted);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .category-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 24px;
+        }
+
+        .category-card h3 {
+            margin: 0 0 16px;
+            font-size: 1.35rem;
+            color: var(--primary-dark);
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-soft);
+        }
+
+        .service-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .service-btn,
+        .submenu-btn {
+            display: block;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .service-btn {
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            border-color: rgba(15, 118, 110, 0.08);
+        }
+
+        .submenu-btn {
+            background: #f9fafb;
+            color: var(--text);
+            border-color: var(--border);
+            font-size: 0.96rem;
+            padding-left: 20px;
+        }
+
+        .service-btn:hover,
+        .submenu-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(15, 118, 110, 0.08);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #19c9a8 0%, #0f766e 100%);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            box-shadow: 0 8px 18px rgba(15, 118, 110, 0.25);
+        }
+
+        .pricing {
+            margin-top: 52px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            margin-top: 24px;
+        }
+
+        .price-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .price-card.featured {
+            border-color: rgba(15, 118, 110, 0.3);
+            background: linear-gradient(180deg, #ffffff 0%, #f0fdfb 100%);
+            transform: translateY(-4px);
+        }
+
+        .price-card .plan {
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .price-card h4 {
+            margin: 12px 0 8px;
+            font-size: 1.7rem;
+            color: var(--primary-dark);
+        }
+
+        .price-card .price-note {
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .price-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 22px;
+            color: var(--text);
+        }
+
+        .price-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .price-card li:last-child {
+            border-bottom: none;
+        }
+
+        .about {
+            margin-top: 52px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            padding: 28px;
+        }
+
+        .contact-wrap {
+            margin-top: 52px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .contact-card,
+        .form-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 28px;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            color: var(--text);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .contact-item strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--primary-dark);
+        }
+
+        form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        label {
+            display: grid;
+            gap: 8px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 13px 14px;
+            font: inherit;
+            background: #f9fafb;
+            color: var(--text);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: 2px solid rgba(15, 118, 110, 0.15);
+            border-color: rgba(15, 118, 110, 0.3);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: var(--white);
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-dark);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .about h3 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+        }
+
+        .about p {
+            color: var(--muted);
+            margin: 0;
+        }
+
+        .contact-box {
+            background: linear-gradient(180deg, var(--primary-soft) 0%, #effdfb 100%);
+            border: 1px solid rgba(15, 118, 110, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .contact-box strong {
+            display: block;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .contact-box span {
+            display: block;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 26px 16px;
+        }
+
+        @media (max-width: 850px) {
+            .hero-inner,
+            .about-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar-inner {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding-top: 56px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .primary-btn,
+            .secondary-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="container topbar-inner">
+            <div class="logo" aria-label="A-TECH Computer Services logo">
+                <div class="logo-mark">A</div>
+                <div class="brand">A-TECH Computer Services</div>
+            </div>
+            <nav class="nav" aria-label="Main navigation">
+                <a href="#services">Services</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#about">About</a>
+                <a href="https://wa.me/2347063305971" target="_blank">WhatsApp</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-inner">
+            <div>
+                <span class="hero-tag">Fast • Reliable • Professional</span>
+                <h1>Digital services that keep you moving.</h1>
+                <p>From NIN corrections and online payments to printing, design, and laminating, we make essential services simple and fast in Yola, Adamawa State.</p>
+
+                <div class="hero-actions">
+                    <a class="primary-btn" href="https://wa.me/2347063305971" target="_blank">Chat on WhatsApp</a>
+                    <a class="secondary-btn" href="#services">Browse Services</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <strong>24/7</strong>
+                        <span>Support</span>
+                    </div>
+                    <div class="stat">
+                        <strong>500+</strong>
+                        <span>Clients</span>
+                    </div>
+                    <div class="stat">
+                        <strong>100%</strong>
+                        <span>Service Focus</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-panel" aria-label="Popular services overview">
+                <h3>Popular services</h3>
+                <div class="service-mini">
+                    <div>
+                        <span>🆔 NIN Correction</span>
+                    </div>
+                    <small>Fast booking</small>
+                </div>
+                <div class="service-mini">
+                    <div>
+                        <span>🖨️ Printing</span>
+                    </div>
+                    <small>Sharp and clear</small>
+                </div>
+                <div class="service-mini">
+                    <div>
+                        <span>🌐 Online Services</span>
+                    </div>
+                    <small>Easy assistance</small>
+                </div>
+                <div class="service-mini">
+                    <div>
+                        <span>🎨 Design</span>
+                    </div>
+                    <small>Creative output</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="section-heading" id="services">
+                <h2>Choose a service</h2>
+                <p>Tap any option below and we will help you immediately through WhatsApp.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="category-card">
+                    <h3>🆔 NIN Corrections</h3>
+                    <div class="service-list">
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20Correction%20of%20Name." class="service-btn" target="_blank">Correction of Name</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20Correction%20of%20Date%20of%20Birth%20-%20Age%20Adding." class="submenu-btn" target="_blank">Age Adding</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20Correction%20of%20Date%20of%20Birth%20-%20Age%20Reducing." class="submenu-btn" target="_blank">Age Reducing</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20Correction%20of%20Date%20of%20Birth." class="service-btn" target="_blank">Correction of Date of Birth</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20Correction%20of%20Date%20of%20Birth%20-%20Age%20spelling." class="submenu-btn" target="_blank">Mistake in spelling</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20Correction%20of%20Date%20of%20Birth%20-%20Age%20interchange." class="submenu-btn" target="_blank">Name interchange</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <h3>🖨️ Printing & Photocopies</h3>
+                    <div class="service-list">
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20want%20to%20print%20Plastic%20ID%20Cards." class="service-btn" target="_blank">Plastic ID Cards</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20Color%20Printings." class="service-btn" target="_blank">Color Printings</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20Photocopy%20services." class="service-btn" target="_blank">Photocopies & More</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <h3>🌐 Internet Services</h3>
+                    <div class="service-list">
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20Online%20Payment." class="service-btn" target="_blank">Online Payment</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20payment%20of%20fees%20of%20onlineh%20-%20fees%20payment." class="submenu-btn" target="_blank">Fees Payment</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20Remita%20of%20Remita%20of%20Remita%20-%20Remita%20Remita." class="submenu-btn" target="_blank">Remita</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20Online%20Screening." class="service-btn" target="_blank">Online Screening</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20NIN%20Recruitment%20of%20Recruitment%20of%20Recruitment%20-%20Recruitment%20Recruitment." class="submenu-btn" target="_blank">Police recruitment, army recruitment, online exams & more</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20help%20with%20Mailing%20and%20other%20services." class="service-btn" target="_blank">&amp; Many More</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <h3>🎨 Graphics Design</h3>
+                    <div class="service-list">
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20want%20to%20order%20a%20Banner%20Design." class="service-btn" target="_blank">Banners</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20want%20to%20order%20Wedding%20Cards." class="service-btn" target="_blank">Wedding Cards</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20want%20to%20order%20Birthday%20Cards." class="service-btn" target="_blank">Birthday Cards</a>
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20want%20to%20order%20Business%20Cards." class="service-btn" target="_blank">Business Cards &amp; Lots More</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <h3>🛡️ Laminations</h3>
+                    <div class="service-list">
+                        <a href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20need%20Document%20Laminating%20services." class="service-btn" target="_blank">Document Laminating</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="pricing" id="pricing">
+                <div class="section-heading">
+                    <h2>Affordable pricing</h2>
+                    <p>Simple charges for the services people trust us for most.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <div class="plan">Starter</div>
+                        <h4>₦50</h4>
+                        <div class="price-note">Best for small and quick requests</div>
+                        <ul>
+                            <li>Basic printing</li>
+                            <li>Quick photocopy jobs</li>
+                            <li>Simple document support</li>
+                        </ul>
+                        <a class="primary-btn" href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20want%20to%20ask%20about%20your%20Starter%20package." target="_blank">Ask for quote</a>
+                    </div>
+
+                    <div class="price-card featured">
+                        <div class="plan">Popular</div>
+                        <h4>₦100</h4>
+                        <div class="price-note">Perfect for regular digital and design services</div>
+                        <ul>
+                            <li>Color printing</li>
+                            <li>Business card design</li>
+                            <li>Fast WhatsApp support</li>
+                        </ul>
+                        <a class="primary-btn" href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20want%20to%20book%20your%20Popular%20package." target="_blank">Book now</a>
+                    </div>
+
+                    <div class="price-card">
+                        <div class="plan">Business</div>
+                        <h4>₦7,500+</h4>
+                        <div class="price-note">For bulk work, branding, and recurring service needs</div>
+                        <ul>
+                            <li>Bulk printing</li>
+                            <li>Banner and branding design</li>
+                            <li>Priority assistance</li>
+                        </ul>
+                        <a class="primary-btn" href="https://wa.me/2347063305971?text=Hello%20A-TECH,%20I%20want%20to%20discuss%20your%20Business%20service%20package." target="_blank">Get started</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about" id="about">
+                <div class="about-grid">
+                    <div>
+                        <h3>Why customers choose A-TECH</h3>
+                        <p>We provide practical digital and printing support for individuals and businesses in Yola. Our goal is to make every service clear, fast, and easy to access through WhatsApp.</p>
+                    </div>
+                    <div class="contact-box">
+                        <strong>Contact</strong>
+                        <span>📍 Yola, Adamawa State</span>
+                        <span>💬 WhatsApp: +234 706 330 5971</span>
+                        <span>🕒 Quick support available</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-wrap" aria-label="Contact us section">
+                <div class="contact-card">
+                    <h3 style="margin-top:0; color: var(--primary-dark);">Talk to us directly</h3>
+                    <p style="color: var(--muted); margin-top: 10px;">Need help choosing the right service? Send a quick message and we will guide you.</p>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Location</strong>
+                                Yola, Adamawa State
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <strong>Phone</strong>
+                                +234 706 330 5971
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div>
+                                <strong>Hours</strong>
+                                Available for fast support
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h3 style="margin-top:0; color: var(--primary-dark);">Send a quick enquiry</h3>
+                    <form id="contactForm">
+                        <div class="field-row">
+                            <label>
+                                Full name
+                                <input type="text" id="name" placeholder="Your name" required>
+                            </label>
+                            <label>
+                                Phone number
+                                <input type="tel" id="phone" placeholder="Your phone number" required>
+                            </label>
+                        </div>
+
+                        <label>
+                            Service needed
+                            <select id="service">
+                                <option value="NIN Correction">NIN Correction</option>
+                                <option value="Printing & Photocopy">Printing & Photocopy</option>
+                                <option value="Internet Service">Internet Service</option>
+                                <option value="Graphics Design">Graphics Design</option>
+                                <option value="Laminating">Laminating</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Message
+                            <textarea id="message" placeholder="Tell us what you need..." required></textarea>
+                        </label>
+
+                        <button type="submit" class="submit-btn">Send via WhatsApp</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 A-TECH Computer Services. Yola, Adamawa State.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value.trim();
+
+            const text = `Hello A-TECH, my name is ${name}. My phone number is ${phone}. I need help with ${service}. Message: ${message}`;
+            const whatsappUrl = `https://wa.me/2347063305971?text=${encodeURIComponent(text)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+
+</body>
+</html>
